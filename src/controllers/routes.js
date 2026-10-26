@@ -9,6 +9,7 @@ import { catalogPage, courseDetailPage } from './catalog/catalog.js';
 import { facultyListPage, facultyDetailPage } from './faculty/faculty.js';
 import { homePage, aboutPage, demoPage, testErrorPage } from './index.js';
 import contactRoutes from './forms/contact.js';
+import registrationRoutes from './forms/registration.js';
 
 // TODO: Add route definitions
 // Home and basic pages
@@ -34,6 +35,14 @@ router.use('/contact', (req, res, next) => {
 
 // Demo page with special middleware
 router.get('/demo', addDemoHeaders, demoPage);
+// Add registration-specific styles to all registration routes
+
+// Registration routes
+router.use('/register', registrationRoutes);
+router.use('/register', (req, res, next) => {
+    res.addStyle('<link rel="stylesheet" href="/css/registration.css">');
+    next();
+});
 
 // Route to trigger a test error
 router.get('/test-error', testErrorPage);
